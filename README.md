@@ -18,7 +18,7 @@ O script oferece várias camadas de proteção que podem ser ativadas/desativada
 
 1. Acesse o link: https://igorjohn.github.io/anti-clone/
 2. Faça as configurações de sua preferência e clique em "Copiar" o código script gerado 
-3. Cole em seu projeto, antes do final do `</body>`
+3. Cole em seu projeto, antes do final do `</body>` da sua página HTML
 
 ## ⚙️ Configuração
 
@@ -26,11 +26,11 @@ As configurações podem ser ajustadas através do objeto `configOptions`:
 
 ```javascript
 const configOptions = {
-  blockDevTools: false,              // Bloquear DevTools
-  blockSourceCodeShortcuts: false,   // Bloquear atalhos para código fonte
-  blockRightClick: true,             // Bloquear clique direito
+  blockDevTools: false,              // Bloquear DevTools, Inspecionar e console
+  blockSourceCodeShortcuts: false,   // Bloquear atalhos para abrir código fonte
+  blockRightClick: true,             // Bloquear clique direito do mouse
   blockCtrl: false,                  // Bloquear atalhos Ctrl/Cmd
-  blockWhenDoesntHaveFbclid: false,  // Bloquear acesso sem fbclid
+  blockWhenDoesntHaveFbclid: false,  // Bloquear acesso sem 'fbclid' na URL
   blockTextSelection: true,          // Bloquear seleção de texto
   cleanHTML: true                    // Limpar HTML em caso de violação
 }
