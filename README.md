@@ -11,6 +11,7 @@ O script oferece várias camadas de proteção que podem ser ativadas/desativada
 - **🖱️ Bloqueio do Botão Direito**: Desativa o clique com botão direito
 - **⌨️ Bloqueio de Atalhos**: Previne o uso de atalhos do teclado (Ctrl/Cmd)
 - **📋 Bloqueio de Seleção de Texto**: Impede a seleção de texto na página
+- **🖥️ Bloqueio em Desktop**: Bloqueia caso o usuário esteja acessando em Desktop
 - **🧹 Deleta o código HTML**: Opção de deletar todo o HTML da página em caso de tentativa de violação
 - **🔍 Verificação de Origem Facebook**: Opção para bloquear acesso direto sem o parâmetro "fbclid" na URL
 
@@ -32,6 +33,7 @@ const configOptions = {
   blockCtrl: false,                  // Bloquear atalhos Ctrl/Cmd
   blockWhenDoesntHaveFbclid: false,  // Bloquear acesso sem 'fbclid' na URL
   blockTextSelection: true,          // Bloquear seleção de texto
+  blockDesktop: false,               // Bloquear acesso em desktop (exibirá apenas em mobile ou tablet)
   cleanHTML: true                    // Limpar HTML em caso de violação
 }
 ```
