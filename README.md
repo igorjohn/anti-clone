@@ -38,19 +38,10 @@ const configOptions = {
 }
 ```
 
-## 🛠️ Personalização
-
-O script inclui uma interface visual com switches para controlar todas as opções em tempo real. Para cada opção você pode:
-
-1. Ativar/desativar através dos switches
-2. Ver o status atual no painel de configuração
-3. Copiar as configurações em formato JSON
-
 ## ⚠️ Observações Importantes
 
 - O script deve ser incluído antes do fechamento da tag `</body>`
 - Algumas funcionalidades podem ser afetadas por políticas de segurança do navegador
-- Recomenda-se testar todas as configurações em diferentes navegadores
 
 ## 🤝 Contribuindo
 
