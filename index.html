@@ -11,8 +11,8 @@
   </head>
 
   <body class="disable-select bg-gray-200">
-    <div class="w-full p-4 fixed top-0 left-0 z-50 flex justify-center items-center text-white text-center" style="background-color: #ff0000">
-      <div id="header-content">Script anti-clonagem</div>
+    <div class="w-full p-4 fixed top-0 left-0 z-50 flex justify-center items-center text-white text-center bg-red-500">
+      ⚠️&nbsp; Script anti-clonagem
     </div>
     <div id="container" class="mt-32 px-3 pb-20 w-full">
       <div class="w-full flex flex-col items-start justify-center gap-2" id="switches-container"></div>
@@ -51,8 +51,11 @@
       blockCtrl: false,
       blockWhenDoesntHaveFbclid: false,
       blockTextSelection: true,
+      blockDesktop: false,
       cleanHTML: true,
     };
+
+    const redirectUrl = "https://www.google.com";
 
     function updateOutputContainer() {
       const container = document.querySelector("#output-container code");
@@ -61,9 +64,14 @@
       Prism.highlightElement(container);
     }
 
+    // TO-DO: Add 'blockDesktop' to the code:
     function getCode(config) {
-      return `document.addEventListener("DOMContentLoaded",()=>{const configOptions=${JSON.stringify(config,null,2)};function closeAllMotherfocker(){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");if(configOptions.cleanHTML){document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500)}return}const eventListeners={rightClick:null,keyboardShortcuts:null};if(eventListeners.rightClick){document.removeEventListener("contextmenu",eventListeners.rightClick);eventListeners.rightClick=null}if(eventListeners.keyboardShortcuts){document.removeEventListener("keydown",eventListeners.keyboardShortcuts);eventListeners.keyboardShortcuts=null}document.querySelector("body").style.userSelect="auto";document.querySelector("body").style.webkitUserSelect="auto";if(configOptions.blockWhenDoesntHaveFbclid==true){const urlParams=new URLSearchParams(window.location.search);if(!urlParams.has("fbclid")){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}}if(configOptions.blockCtrl==true){eventListeners.keyboardShortcuts=function(e){if(e.metaKey||e.ctrlKey||e.shiftKey){e.preventDefault();e.stopPropagation();return false}};document.addEventListener("keydown",eventListeners.keyboardShortcuts)}if(configOptions.blockTextSelection==true){document.querySelector("body").style.userSelect="none";document.querySelector("body").style.webkitUserSelect="none"}if(configOptions.blockRightClick==true){eventListeners.rightClick=function(e){e.preventDefault();return false};document.addEventListener("contextmenu",eventListeners.rightClick)}if(configOptions.blockSourceCodeShortcuts==true){document.onkeydown=function(e){if((e.ctrlKey&&e.key.toLowerCase()==="u")||(e.metaKey&&e.altKey&&e.key.toLowerCase()==="u")||e.key==="¨"){e.preventDefault();closeAllMotherfocker();return false}}}if(configOptions.blockDevTools==true){document.onkeydown=function(e){if(e.key==="F12"||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="i")||(e.ctrlKey&&e.altKey&&e.key.toLowerCase()==="i")||e.key==="^"||(e.metaKey&&e.key==="I")||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="c")||(e.metaKey&&e.altKey&&e.key.toLowerCase()==="c")||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="j")){e.preventDefault();closeAllMotherfocker();return false}};let originalWidth=window.innerWidth;let originalHeight=window.innerHeight;const threshold=150;let isDevToolsOpen=screen.width-window.innerWidth>threshold;if(isDevToolsOpen){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}window.addEventListener("resize",function(){if(window.innerWidth!==originalWidth||window.innerHeight!==originalHeight||isDevToolsOpen){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}})}});`;
-    };
+      return `document.addEventListener("DOMContentLoaded",()=>{const configOptions=${JSON.stringify(
+        config,
+        null,
+        2
+      )};function closeAllMotherfocker(){console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}","color: #FF0000; font-size: 20px; font-weight: bold;");if(configOptions.cleanHTML){document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500)}return}const eventListeners={rightClick:null,keyboardShortcuts:null};if(eventListeners.rightClick){document.removeEventListener("contextmenu",eventListeners.rightClick);eventListeners.rightClick=null}if(eventListeners.keyboardShortcuts){document.removeEventListener("keydown",eventListeners.keyboardShortcuts);eventListeners.keyboardShortcuts=null}document.querySelector("body").style.userSelect="auto";document.querySelector("body").style.webkitUserSelect="auto";if(configOptions.blockWhenDoesntHaveFbclid==true){const urlParams=new URLSearchParams(window.location.search);if(!urlParams.has("fbclid")){console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}}if(configOptions.blockCtrl==true){eventListeners.keyboardShortcuts=function(e){if(e.metaKey||e.ctrlKey||e.shiftKey){e.preventDefault();e.stopPropagation();return false}};document.addEventListener("keydown",eventListeners.keyboardShortcuts)}if(configOptions.blockTextSelection==true){document.querySelector("body").style.userSelect="none";document.querySelector("body").style.webkitUserSelect="none"}if(configOptions.blockRightClick==true){eventListeners.rightClick=function(e){e.preventDefault();return false};document.addEventListener("contextmenu",eventListeners.rightClick)}if(configOptions.blockSourceCodeShortcuts==true){document.onkeydown=function(e){if((e.ctrlKey&&e.key.toLowerCase()==="u")||(e.metaKey&&e.altKey&&e.key.toLowerCase()==="u")||e.key==="¨"){e.preventDefault();closeAllMotherfocker();return false}}}if(configOptions.blockDevTools==true){document.onkeydown=function(e){if(e.key==="F12"||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="i")||(e.ctrlKey&&e.altKey&&e.key.toLowerCase()==="i")||e.key==="^"||(e.metaKey&&e.key==="I")||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="c")||(e.metaKey&&e.altKey&&e.key.toLowerCase()==="c")||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="j")){e.preventDefault();closeAllMotherfocker();return false}};let originalWidth=window.innerWidth;let originalHeight=window.innerHeight;const threshold=150;let isDevToolsOpen=screen.width-window.innerWidth>threshold;if(isDevToolsOpen){console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}window.addEventListener("resize",function(){if(window.innerWidth!==originalWidth||window.innerHeight!==originalHeight||isDevToolsOpen){console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}})}});`;
+    }
 
     function copyConfig() {
       const configText = getCode(configOptions);
@@ -84,13 +92,14 @@
     const container = document.getElementById("switches-container");
     Object.keys(configOptions).forEach((key) => {
       const optionDescriptions = {
-        blockDevTools: "Bloquear a abertura do 'Dev Tools', 'Inspecionar Elemento' e 'Console' do Chrome",
+        blockDevTools: "Bloquear a abertura do 'Dev Tools', 'Inspecionar' e 'Console' do Chrome",
         blockSourceCodeShortcuts: "Bloquear atalhos de teclado para ver o código fonte",
         blockRightClick: "Bloquear o clique direito do mouse",
         blockCtrl: "Bloquear atalhos do teclado (Ctrl/Cmd)",
-        blockWhenDoesntHaveFbclid: "Bloquear quando não vier do Facebook",
-        blockTextSelection: "Bloquear seleção de texto",
-        cleanHTML: "Deletar o HTML da página",
+        blockWhenDoesntHaveFbclid: "Bloquear quando não tiver o parâmetro fbclid (Facebook) na URL",
+        blockTextSelection: "Bloquear seleção de texto na página",
+        cleanHTML: "Ocultar o HTML da página em caso de tentativa de clonagem",
+        blockDesktop: "Bloquear o acesso à página em dispositivos desktop (exibirá somente em dispositivos móveis)",
       };
 
       const switchDiv = document.createElement("div");
@@ -120,12 +129,12 @@
     });
 
     function closeAllMotherfocker() {
-      console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+      console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}", "color: #FF0000; font-size: 20px; font-weight: bold;");
       if (configOptions.cleanHTML) {
         document.body.innerHTML = "";
         document.head.innerHTML = "";
         setTimeout(() => {
-          window.location.href = "about:blank";
+          window.location.href = redirectUrl;
         }, 500);
       }
       return;
@@ -155,11 +164,24 @@
       if (configOptions.blockWhenDoesntHaveFbclid == true) {
         const urlParams = new URLSearchParams(window.location.search);
         if (!urlParams.has("fbclid")) {
-          console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+          console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}", "color: #FF0000; font-size: 20px; font-weight: bold;");
           document.body.innerHTML = "";
           document.head.innerHTML = "";
           setTimeout(() => {
-            window.location.href = "about:blank";
+            window.location.href = redirectUrl;
+          }, 500);
+          return false;
+        }
+      }
+
+      // Block desktop
+      if (configOptions.blockDesktop == true) {
+        if (!navigator?.userAgentData?.mobile) {
+          console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}", "color: #FF0000; font-size: 20px; font-weight: bold;");
+          document.body.innerHTML = "";
+          document.head.innerHTML = "";
+          setTimeout(() => {
+            window.location.href = redirectUrl;
           }, 500);
           return false;
         }
@@ -233,21 +255,21 @@
         const threshold = 150; // margem de segurança
         let isDevToolsOpen = screen.width - window.innerWidth > threshold;
         if (isDevToolsOpen) {
-          console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+          console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}", "color: #FF0000; font-size: 20px; font-weight: bold;");
           document.body.innerHTML = "";
           document.head.innerHTML = "";
           setTimeout(() => {
-            window.location.href = "about:blank";
+            window.location.href = redirectUrl;
           }, 500);
           return false;
         }
         window.addEventListener("resize", function () {
           if (window.innerWidth !== originalWidth || window.innerHeight !== originalHeight || isDevToolsOpen) {
-            console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+            console.log("%cVai copiar outra oferta, vagabundo! \u{1F921}", "color: #FF0000; font-size: 20px; font-weight: bold;");
             document.body.innerHTML = "";
             document.head.innerHTML = "";
             setTimeout(() => {
-              window.location.href = "about:blank";
+              window.location.href = redirectUrl;
             }, 500);
             return false;
           }
@@ -260,7 +282,6 @@
       applyConfig();
     });
   </script>
-
 </html>
 <style>
   .disable-select {
@@ -306,5 +327,11 @@
 
   .token.boolean {
     color: #56b6c2;
+  }
+
+  code.language-javascript {
+    white-space: pre-wrap;
+    font-size: 0.875rem;
+    line-height: 1.55;
   }
 </style>
