@@ -16,9 +16,9 @@ O script oferece várias camadas de proteção que podem ser ativadas/desativada
 
 ## 📦 Como Usar
 
-1. Copie o conteúdo do arquivo `index.html`
-2. Cole em seu projeto
-3. Personalize as configurações conforme necessário
+1. Acesse o link: https://igorjohn.github.io/anti-clone/
+2. Faça as configurações de sua preferência e clique em "Copiar" o código script gerado 
+3. Cole em seu projeto, antes do final do `</body>`
 
 ## ⚙️ Configuração
 
