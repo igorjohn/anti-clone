@@ -1,121 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Script anti-clonagem</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Script anti-clonagem</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-</head>
-
-<body class="disable-select bg-gray-200">
-  <div class="w-full p-4 fixed top-0 left-0 z-50 flex justify-center items-center text-white text-center" style="background-color: #ff0000;">
-    <div id="header-content">Script anti-clonagem
+  <body class="disable-select bg-gray-200">
+    <div class="w-full p-4 fixed top-0 left-0 z-50 flex justify-center items-center text-white text-center" style="background-color: #ff0000">
+      <div id="header-content">Script anti-clonagem</div>
     </div>
-  </div>
-  <div id="container" class="mt-32 px-3 pb-20 w-full">
+    <div id="container" class="mt-32 px-3 pb-20 w-full">
+      <div class="w-full flex flex-col items-start justify-center gap-2" id="switches-container"></div>
 
-    <div class="w-full flex flex-col items-start justify-center gap-2" id="switches-container"></div>
-
-    <div class="w-full flex flex-col gap-3 rounded-md bg-gray-200 p-4 mt-4">
-      <span class="text-sm font-medium text-gray-900">Output:</span>
-      <div class="relative">
-        <button onclick="copyConfig()" class="absolute top-5 right-2 p-2 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer rounded-md bg-white/10 flex items-center justify-center gap-1 font-medium text-xs">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-            <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-          </svg>
-          Copiar
-        </button>
-        <pre id="output-container" class="w-full overflow-x-auto !px-4 !pb-6 !pt-6 rounded bg-[#2d2d2d]"><code class="language-javascript">
+      <div class="w-full flex flex-col gap-3 rounded-md bg-gray-200/50 p-4 mt-4">
+        <div class="flex flex-col gap-1.5">
+          <span class="text-sm font-medium text-gray-900">Settings output:</span>
+          <span class="text-xs text-gray-400">Copie o código gerado e cole em seu projeto, antes do final do &lt;/body&gt; da sua página HTML</span>
+        </div>
+        <div class="relative">
+          <button onclick="copyConfig()" class="absolute top-5 right-2 p-2 text-white transition-colors duration-200 cursor-pointer rounded-md bg-indigo-500 flex items-center justify-center gap-1 font-medium text-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+            </svg>
+            Copiar
+          </button>
+          <pre id="output-container" class="w-full overflow-x-auto !px-4 !pb-6 !pt-6 rounded bg-[#2d2d2d]"><code class="language-javascript">
 
         </code></pre>
+        </div>
       </div>
     </div>
+    <div id="toast" class="fixed bottom-16 right-4 bg-[#1bae79] text-white text-sm flex items-center gap-2 px-4 py-3 rounded shadow-lg transform translate-y-full opacity-0 transition-all duration-300 z-[6]">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>
+      Copiado com sucesso!
+    </div>
+  </body>
+  <script>
+    const configOptions = {
+      blockDevTools: false,
+      blockSourceCodeShortcuts: false,
+      blockRightClick: true,
+      blockCtrl: false,
+      blockWhenDoesntHaveFbclid: false,
+      blockTextSelection: true,
+      cleanHTML: true,
+    };
 
-  </div>
-  <div id="toast" class="fixed bottom-16 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg transform translate-y-full opacity-0 transition-all duration-300 z-[6]">
-    Copiado com sucesso!
-  </div>
-</body>
-<script>
-  const configOptions = {
-    blockDevTools: false,
-    blockSourceCodeShortcuts: false,
-    blockRightClick: true,
-    blockCtrl: false,
-    blockWhenDoesntHaveFbclid: false,
-    blockTextSelection: true,
-    cleanHTML: true,
-  }
-
-  // Store event listeners references
-  const eventListeners = {
-    rightClick: null,
-    keyboardShortcuts: null
-  };
-
-  // Cleanup function to remove all event listeners
-  function cleanupEventListeners() {
-    if (eventListeners.rightClick) {
-      document.removeEventListener('contextmenu', eventListeners.rightClick);
-      eventListeners.rightClick = null;
+    function updateOutputContainer() {
+      const container = document.querySelector("#output-container code");
+      const content = `const configOptions = ${JSON.stringify(configOptions, null, 2)}`;
+      container.textContent = content;
+      Prism.highlightElement(container);
     }
-    if (eventListeners.keyboardShortcuts) {
-      document.removeEventListener('keydown', eventListeners.keyboardShortcuts);
-      eventListeners.keyboardShortcuts = null;
+
+    function getCode(config) {
+      return `document.addEventListener("DOMContentLoaded",()=>{const configOptions=${JSON.stringify(config,null,2)};function closeAllMotherfocker(){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");if(configOptions.cleanHTML){document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500)}return}const eventListeners={rightClick:null,keyboardShortcuts:null};if(eventListeners.rightClick){document.removeEventListener("contextmenu",eventListeners.rightClick);eventListeners.rightClick=null}if(eventListeners.keyboardShortcuts){document.removeEventListener("keydown",eventListeners.keyboardShortcuts);eventListeners.keyboardShortcuts=null}document.querySelector("body").style.userSelect="auto";document.querySelector("body").style.webkitUserSelect="auto";if(configOptions.blockWhenDoesntHaveFbclid==true){const urlParams=new URLSearchParams(window.location.search);if(!urlParams.has("fbclid")){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}}if(configOptions.blockCtrl==true){eventListeners.keyboardShortcuts=function(e){if(e.metaKey||e.ctrlKey||e.shiftKey){e.preventDefault();e.stopPropagation();return false}};document.addEventListener("keydown",eventListeners.keyboardShortcuts)}if(configOptions.blockTextSelection==true){document.querySelector("body").style.userSelect="none";document.querySelector("body").style.webkitUserSelect="none"}if(configOptions.blockRightClick==true){eventListeners.rightClick=function(e){e.preventDefault();return false};document.addEventListener("contextmenu",eventListeners.rightClick)}if(configOptions.blockSourceCodeShortcuts==true){document.onkeydown=function(e){if((e.ctrlKey&&e.key.toLowerCase()==="u")||(e.metaKey&&e.altKey&&e.key.toLowerCase()==="u")||e.key==="¨"){e.preventDefault();closeAllMotherfocker();return false}}}if(configOptions.blockDevTools==true){document.onkeydown=function(e){if(e.key==="F12"||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="i")||(e.ctrlKey&&e.altKey&&e.key.toLowerCase()==="i")||e.key==="^"||(e.metaKey&&e.key==="I")||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="c")||(e.metaKey&&e.altKey&&e.key.toLowerCase()==="c")||(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="j")){e.preventDefault();closeAllMotherfocker();return false}};let originalWidth=window.innerWidth;let originalHeight=window.innerHeight;const threshold=150;let isDevToolsOpen=screen.width-window.innerWidth>threshold;if(isDevToolsOpen){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}window.addEventListener("resize",function(){if(window.innerWidth!==originalWidth||window.innerHeight!==originalHeight||isDevToolsOpen){console.log("%cVai copiar outra oferta, vagabundo! &#129313;","color: #FF0000; font-size: 20px; font-weight: bold;");document.body.innerHTML="";document.head.innerHTML="";setTimeout(()=>{window.location.href="about:blank"},500);return false}})}});`;
+    };
+
+    function copyConfig() {
+      const configText = getCode(configOptions);
+      console.log(configText);
+
+      navigator.clipboard.writeText(configText).then(() => {
+        const toast = document.getElementById("toast");
+        toast.style.transform = "translateY(0)";
+        toast.style.opacity = "1";
+        setTimeout(() => {
+          toast.style.transform = "translateY(100%)";
+          toast.style.opacity = "0";
+        }, 3000);
+      });
     }
-    // Reset text selection
-    document.querySelector('body').style.userSelect = 'auto';
-    document.querySelector('body').style.webkitUserSelect = 'auto';
-  }
 
-  // Descriptions for each option
-  const optionDescriptions = {
-    blockDevTools: "Bloquear o uso de ferramentas de desenvolvimento",
-    blockSourceCodeShortcuts: "Bloquear atalhos de teclado para ver o código fonte",
-    blockRightClick: "Bloquear o clique direito do mouse",
-    blockCtrl: "Bloquear atalhos do teclado (Ctrl/Cmd)",
-    blockWhenDoesntHaveFbclid: "Bloquear quando não vier do Facebook",
-    blockTextSelection: "Bloquear seleção de texto",
-    cleanHTML: "Deletar o HTML da página",
-  }
+    // Create switches
+    const container = document.getElementById("switches-container");
+    Object.keys(configOptions).forEach((key) => {
+      const optionDescriptions = {
+        blockDevTools: "Bloquear a abertura do 'Dev Tools', 'Inspecionar Elemento' e 'Console' do Chrome",
+        blockSourceCodeShortcuts: "Bloquear atalhos de teclado para ver o código fonte",
+        blockRightClick: "Bloquear o clique direito do mouse",
+        blockCtrl: "Bloquear atalhos do teclado (Ctrl/Cmd)",
+        blockWhenDoesntHaveFbclid: "Bloquear quando não vier do Facebook",
+        blockTextSelection: "Bloquear seleção de texto",
+        cleanHTML: "Deletar o HTML da página",
+      };
 
-  function updateOutputContainer() {
-    const container = document.querySelector('#output-container code');
-    const content = `const configOptions = ${JSON.stringify(configOptions, null, 2)}`;
-    container.textContent = content;
-    Prism.highlightElement(container);
-  }
-
-  function showToast() {
-    const toast = document.getElementById('toast');
-    toast.style.transform = 'translateY(0)';
-    toast.style.opacity = '1';
-    setTimeout(() => {
-      toast.style.transform = 'translateY(100%)';
-      toast.style.opacity = '0';
-    }, 3000);
-  }
-
-  function copyConfig() {
-    const configText = JSON.stringify(configOptions, null, 2);
-    navigator.clipboard.writeText(configText).then(() => {
-      showToast();
-    });
-  }
-
-  // Create switches
-  const container = document.getElementById('switches-container');
-  Object.keys(configOptions).forEach(key => {
-    const switchDiv = document.createElement('div');
-    switchDiv.innerHTML = `
+      const switchDiv = document.createElement("div");
+      switchDiv.innerHTML = `
       <label class="inline-flex items-center cursor-pointer">
-        <input type="checkbox" value="" class="sr-only peer" ${configOptions[key] ? 'checked' : ''}>
-        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 transition-all duration-300 ease"></div>
+        <input type="checkbox" value="" class="sr-only peer" ${configOptions[key] ? "checked" : ""}>
+        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-0 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-500 transition-all duration-300 ease"></div>
         <div class="ms-3 flex flex-1 flex-col gap-[0.25rem]">
           <span class="text-sm font-medium text-gray-900">
             ${key}
@@ -125,108 +107,159 @@
           </span>
         </div>
       </label>
-    `;
+     `;
 
-    const checkbox = switchDiv.querySelector('input[type="checkbox"]');
-    checkbox.addEventListener('change', (e) => {
-      configOptions[key] = e.target.checked;
-      updateOutputContainer();
-      applyConfig();
+      const checkbox = switchDiv.querySelector('input[type="checkbox"]');
+      checkbox.addEventListener("change", (e) => {
+        configOptions[key] = e.target.checked;
+        updateOutputContainer();
+        applyConfig();
+      });
+
+      container.appendChild(switchDiv);
     });
 
-    container.appendChild(switchDiv);
-  });
-
-  function closeAllMotherfocker() {
-    console.log('%cVai copiar outra oferta, vagabundo! 🤡', 'color: #FF6B00; font-size: 20px; font-weight: bold;');
-    if (configOptions.cleanHTML) {
-      document.body.innerHTML = '';
-      document.head.innerHTML = '';
-      setTimeout(() => {
-        window.location.href = "about:blank";
-      }, 500);
-    }
-    return;
-  }
-
-  function applyConfig() {
-    // Clean up existing listeners first
-    cleanupEventListeners();
-
-    // Block when doesnt have fbclid
-    if (configOptions.blockWhenDoesntHaveFbclid == true) {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (!urlParams.has('fbclid')) closeAllMotherfocker();
+    function closeAllMotherfocker() {
+      console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+      if (configOptions.cleanHTML) {
+        document.body.innerHTML = "";
+        document.head.innerHTML = "";
+        setTimeout(() => {
+          window.location.href = "about:blank";
+        }, 500);
+      }
+      return;
     }
 
-    // Prevent keyboard shortcuts
-    if (configOptions.blockCtrl == true) {
-      eventListeners.keyboardShortcuts = function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey) {
-          e.preventDefault();
-          e.stopPropagation();
-          return false;
-        }
-      };
-      document.addEventListener('keydown', eventListeners.keyboardShortcuts);
-    }
+    // Store event listeners references
+    const eventListeners = {
+      rightClick: null,
+      keyboardShortcuts: null,
+    };
 
-    // Prevent text selection
-    if (configOptions.blockTextSelection == true) {
-      document.querySelector('body').style.userSelect = 'none';
-      document.querySelector('body').style.webkitUserSelect = 'none';
-    }
+    function applyConfig() {
+      // Clean up existing listeners first
+      if (eventListeners.rightClick) {
+        document.removeEventListener("contextmenu", eventListeners.rightClick);
+        eventListeners.rightClick = null;
+      }
+      if (eventListeners.keyboardShortcuts) {
+        document.removeEventListener("keydown", eventListeners.keyboardShortcuts);
+        eventListeners.keyboardShortcuts = null;
+      }
+      // Reset text selection
+      document.querySelector("body").style.userSelect = "auto";
+      document.querySelector("body").style.webkitUserSelect = "auto";
 
-    // Prevent right click
-    if (configOptions.blockRightClick == true) {
-      eventListeners.rightClick = function (e) {
-        e.preventDefault();
-        return false;
-      };
-      document.addEventListener('contextmenu', eventListeners.rightClick);
-    }
-
-    // Block when devtools is open
-    if (configOptions.blockDevTools == true) {
-      document.onkeydown = function (e) {
-        if (
-          e.key === "F12" || // DevTools
-          (e.ctrlKey && e.key.toLowerCase() === "u") || // View Source (Windows: Ctrl+U)
-          (e.metaKey && e.altKey && e.key.toLowerCase() === "u") || e.key === '¨' || // View Source (Mac: Cmd+Option+U)
-          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") || // DevTools (Windows: Ctrl+Shift+I)
-          (e.ctrlKey && e.altKey && e.key.toLowerCase() === "i") || e.key === '^' || // DevTools (Mac: Cmd+Option+I)
-          (e.metaKey && e.key === "I") || // DevTools (Mac: Cmd+Option+I alternative)
-          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") || // Inspecionar (Windows: Ctrl+Shift+C)
-          (e.metaKey && e.altKey && e.key.toLowerCase() === "c") || // Inspecionar (Mac: Cmd+Option+C)
-          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") // Console (Windows: Ctrl+Shift+J)
-        ) {
-          e.preventDefault();
-          closeAllMotherfocker();
+      // Block when doesnt have fbclid
+      if (configOptions.blockWhenDoesntHaveFbclid == true) {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!urlParams.has("fbclid")) {
+          console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+          document.body.innerHTML = "";
+          document.head.innerHTML = "";
+          setTimeout(() => {
+            window.location.href = "about:blank";
+          }, 500);
           return false;
         }
       }
 
-      let originalWidth = window.innerWidth;
-      let originalHeight = window.innerHeight;
-      const threshold = 150; // margem de segurança
-      let isDevToolsOpen = screen.width - window.innerWidth > threshold;
-      if (isDevToolsOpen) {
-        closeAllMotherfocker();
-      };
+      // Prevent keyboard shortcuts
+      if (configOptions.blockCtrl == true) {
+        eventListeners.keyboardShortcuts = function (e) {
+          if (e.metaKey || e.ctrlKey || e.shiftKey) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          }
+        };
+        document.addEventListener("keydown", eventListeners.keyboardShortcuts);
+      }
 
-      window.addEventListener('resize', function () {
-        if (window.innerWidth !== originalWidth || window.innerHeight !== originalHeight || isDevToolsOpen) {
-          closeAllMotherfocker();
+      // Prevent text selection
+      if (configOptions.blockTextSelection == true) {
+        document.querySelector("body").style.userSelect = "none";
+        document.querySelector("body").style.webkitUserSelect = "none";
+      }
+
+      // Prevent right click
+      if (configOptions.blockRightClick == true) {
+        eventListeners.rightClick = function (e) {
+          e.preventDefault();
+          return false;
+        };
+        document.addEventListener("contextmenu", eventListeners.rightClick);
+      }
+
+      // Prevent source code shortcuts
+      if (configOptions.blockSourceCodeShortcuts == true) {
+        document.onkeydown = function (e) {
+          if (
+            (e.ctrlKey && e.key.toLowerCase() === "u") || // View Source (Windows: Ctrl+U)
+            (e.metaKey && e.altKey && e.key.toLowerCase() === "u") || // View Source (Mac: Cmd+Option+U)
+            e.key === "¨" // View Source (Mac: Cmd+Option+U)
+          ) {
+            e.preventDefault();
+            closeAllMotherfocker();
+            return false;
+          }
+        };
+      }
+
+      // Block when devtools is open
+      if (configOptions.blockDevTools == true) {
+        // block devtools shortcuts
+        document.onkeydown = function (e) {
+          if (
+            e.key === "F12" || // DevTools
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") || // DevTools (Windows: Ctrl+Shift+I)
+            (e.ctrlKey && e.altKey && e.key.toLowerCase() === "i") || // DevTools (Mac: Cmd+Option+I)
+            e.key === "^" || // DevTools (Mac: Cmd+Option+I)
+            (e.metaKey && e.key === "I") || // DevTools (Mac: Cmd+Option+I alternative)
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") || // Inspecionar (Windows: Ctrl+Shift+C)
+            (e.metaKey && e.altKey && e.key.toLowerCase() === "c") || // Inspecionar (Mac: Cmd+Option+C)
+            (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") // Console (Windows: Ctrl+Shift+J)
+          ) {
+            e.preventDefault();
+            closeAllMotherfocker();
+            return false;
+          }
+        };
+
+        // block devtools resize
+        let originalWidth = window.innerWidth;
+        let originalHeight = window.innerHeight;
+        const threshold = 150; // margem de segurança
+        let isDevToolsOpen = screen.width - window.innerWidth > threshold;
+        if (isDevToolsOpen) {
+          console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+          document.body.innerHTML = "";
+          document.head.innerHTML = "";
+          setTimeout(() => {
+            window.location.href = "about:blank";
+          }, 500);
+          return false;
         }
-      });
+        window.addEventListener("resize", function () {
+          if (window.innerWidth !== originalWidth || window.innerHeight !== originalHeight || isDevToolsOpen) {
+            console.log("%cVai copiar outra oferta, vagabundo! &#129313;", "color: #FF0000; font-size: 20px; font-weight: bold;");
+            document.body.innerHTML = "";
+            document.head.innerHTML = "";
+            setTimeout(() => {
+              window.location.href = "about:blank";
+            }, 500);
+            return false;
+          }
+        });
+      }
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    updateOutputContainer();
-    applyConfig();
-  });
-</script>
+    document.addEventListener("DOMContentLoaded", () => {
+      updateOutputContainer();
+      applyConfig();
+    });
+  </script>
 
 </html>
 <style>
