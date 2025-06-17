@@ -1,6 +1,6 @@
 # 🚫 Script Anti-Clonagem 
 
-O objetivo desse script é **impedir** (ou, pelo menos, **dificultar consideravelmente**) que outras pessoas consigam **clonar** suas páginas e ofertas.
+O objetivo desse script é **impedir** (ou, pelo menos, **dificultar consideravelmente**) que outras pessoas consigam **clonar** suas páginas de vendas e ofertas.
 
 ## 🚀 Funcionalidades
 
@@ -42,15 +42,6 @@ const configOptions = {
 
 - O script deve ser incluído antes do fechamento da tag `</body>`
 - Algumas funcionalidades podem ser afetadas por políticas de segurança do navegador
-
-## 🤝 Contribuindo
-
-Sinta-se à vontade para:
-1. Fazer um fork do projeto
-2. Criar uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abrir um Pull Request
 
 ## 📝 Licença
 
